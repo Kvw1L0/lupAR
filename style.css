@@ -1,0 +1,113 @@
+:root {
+    --primary: #8a2be2; /* Púrpura mágico */
+    --accent: #00ffcc; /* Cian brillante */
+    --bg-dark: #120e1f;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
+    background-color: var(--bg-dark);
+    color: white;
+}
+
+/* --- LANDING PAGE (index.html) --- */
+#home-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #2a1b4d 0%, var(--bg-dark) 100%);
+}
+
+.glass-container {
+    text-align: center;
+    padding: 40px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 80%;
+    max-width: 350px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.icon-lupa { font-size: 60px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+h1 { margin: 0 0 15px 0; font-size: 2.2rem; color: #fff; text-shadow: 0 2px 10px var(--primary); }
+p { color: #ccc; margin-bottom: 30px; line-height: 1.5; }
+
+#btn-start {
+    background: linear-gradient(45deg, var(--primary), #b026ff);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.5);
+    transition: transform 0.2s;
+}
+#btn-start:active { transform: scale(0.95); }
+
+/* --- INTERFAZ AR (ar-view.html) --- */
+#scanner-ui { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+
+.back-btn { position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.5); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; cursor: pointer; pointer-events: auto; backdrop-filter: blur(5px); }
+
+/* El Círculo de la Lupa */
+.reticle {
+    width: 250px;
+    height: 250px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6); /* Oscurece todo alrededor de la lupa */
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* Línea de escaneo láser */
+.scan-line {
+    width: 100%; height: 2px;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+    position: absolute;
+    top: 0;
+    animation: scan 2s linear infinite;
+}
+
+/* Estado cuando encuentra el objetivo */
+.reticle.found { border-color: var(--accent); box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.8), inset 0 0 20px var(--accent); }
+.reticle.found .scan-line { display: none; }
+
+.scan-instruction { position: absolute; bottom: 15%; color: white; font-weight: bold; letter-spacing: 2px; text-shadow: 0 2px 4px black; animation: pulse 1.5s infinite; transition: opacity 0.3s; }
+
+/* Tarjeta de Información */
+#info-card {
+    position: absolute;
+    bottom: 5%;
+    background: rgba(18, 14, 31, 0.9);
+    border: 1px solid var(--accent);
+    padding: 20px;
+    border-radius: 15px;
+    width: 85%;
+    max-width: 350px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    transition: opacity 0.3s, transform 0.3s;
+}
+#info-card.hidden { opacity: 0; transform: translateY(20px); pointer-events: none; display: block !important; }
+#obj-title { margin: 0 0 10px 0; color: var(--accent); font-size: 1.5rem; }
+#obj-desc { margin: 0; color: #ddd; }
+
+/* Cargador */
+#loading-overlay { position: fixed; inset: 0; background: var(--bg-dark); z-index: 5000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s; }
+.spinner { width: 50px; height: 50px; border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
+#loading-text { color: var(--primary); font-weight: bold; letter-spacing: 1px; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes scan { 0% { top: 0; } 50% { top: 100%; } 100% { top: 0; } }
