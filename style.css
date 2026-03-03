@@ -11,7 +11,7 @@ body {
     color: white;
 }
 
-/* --- LANDING PAGE (index.html) --- */
+/* --- LANDING PAGE --- */
 #home-screen {
     height: 100vh;
     display: flex;
@@ -50,7 +50,7 @@ p { color: #ccc; margin-bottom: 30px; line-height: 1.5; }
 }
 #btn-start:active { transform: scale(0.95); }
 
-/* --- INTERFAZ AR (ar-view.html) --- */
+/* --- INTERFAZ AR --- */
 #scanner-ui { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
 
 .back-btn { position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.5); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; cursor: pointer; pointer-events: auto; backdrop-filter: blur(5px); }
@@ -62,12 +62,12 @@ p { color: #ccc; margin-bottom: 30px; line-height: 1.5; }
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     position: relative;
-    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6); /* Oscurece todo alrededor de la lupa */
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
     transition: all 0.3s ease;
     overflow: hidden;
 }
 
-/* Línea de escaneo láser */
+/* Línea láser */
 .scan-line {
     width: 100%; height: 2px;
     background: var(--primary);
@@ -77,7 +77,7 @@ p { color: #ccc; margin-bottom: 30px; line-height: 1.5; }
     animation: scan 2s linear infinite;
 }
 
-/* Estado cuando encuentra el objetivo */
+/* Estado al encontrar imagen */
 .reticle.found { border-color: var(--accent); box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.8), inset 0 0 20px var(--accent); }
 .reticle.found .scan-line { display: none; }
 
